@@ -36,7 +36,7 @@ const count = ref(0)
         <li>
           <a href="https://vite.dev/" target="_blank">
             <img class="logo" :src="viteLogo" alt="" />
-            Explore Vite
+            Explore Vite test
           </a>
         </li>
         <li>
