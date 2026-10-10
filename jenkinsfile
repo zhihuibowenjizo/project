@@ -1,0 +1,30 @@
+pipeline {
+    agent { label 'vue-builder' }
+
+    options {
+        disableConcurrentBuilds()
+        timeout(time: 15, unit: 'MINUTES')
+        buildDiscarder(logRotator(numToKeepStr: '10'))
+    }
+
+    stages {
+
+        stage('安装依赖') {
+            steps {
+                sh 'npx --yes pnpm@10 install --frozen-lockfile'
+            }
+        }
+
+        stage('构建项目') {
+            steps {
+                sh 'npx --yes pnpm@10 run build'
+            }
+        }
+
+        stage('保存构建产物') {
+            steps {
+                archiveArtifacts artifacts: 'dist/**', fingerprint: true
+            }
+        }
+    }
+}
