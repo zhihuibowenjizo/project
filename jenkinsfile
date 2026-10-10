@@ -7,6 +7,10 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '10'))
     }
 
+    triggers {
+        pollSCM('H/2 * * * *')
+    }
+
     stages {
 
         stage('安装依赖') {
